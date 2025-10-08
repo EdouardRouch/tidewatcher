@@ -35,4 +35,5 @@ tags = ["github", "actions"]
 exclude = [
     "^(.*)test(.*)$",  # Exclure les fichiers de test
     "^(.*)example(.*)$"  # Exclure les fichiers d'exemple
+    "^(.*).md$"         
 ]
