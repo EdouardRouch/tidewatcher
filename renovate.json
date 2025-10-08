@@ -1,0 +1,51 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":enableVulnerabilityAlertsWithLabel('security')",
+    ":preserveSemverRanges",
+    ":rebaseStalePrs",
+    "group:recommended"
+  ],
+  "baseBranchPatterns": [
+    "dev"
+  ],
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "*"
+      ],
+      "enabled": true
+    },
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true,
+      "matchCurrentVersion": "!/^0/",
+      "ignoreTests": true
+    },
+    {
+      "managers": [
+        "dockerfile"
+      ],
+      "automerge": true
+    },
+    {
+      "managers": [
+        "github-actions"
+      ],
+      "enabled": true
+    }
+  ],
+  "stopUpdatingLabel": "renovate/stop-updating",
+  "pruneBranchAfterAutomerge": true,
+  "pruneStaleBranches": true
+}

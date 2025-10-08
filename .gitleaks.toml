@@ -1,0 +1,38 @@
+title = "TideWatcher Gitleaks configuration"
+
+[extend]
+# useDefault will extend the default gitleaks config built in to the binary
+# the latest version is located at:
+# https://github.com/gitleaks/gitleaks/blob/master/config/gitleaks.toml
+useDefault = true
+
+[[rules]]
+id = "jellyfin_api_key"
+description = "Jellyfin API key"
+regex = '''JELLYFIN_API_KEY\s*=\s*["']?[A-Za-z0-9_\-]{32,}["']?'''
+tags = ["api-key"]
+
+[[rules]]
+id = "dockerhub_token"
+description = "Docker Hub Token"
+regex = '''DOCKER_HUB_ACCESS_TOKEN\s*=\s*["']?[A-Za-z0-9_\-]{20,}["']?'''
+tags = ["token"]
+
+[[rules]]
+id = "generic_env_secret"
+description = "Generic secret from .env or config"
+regex = '''(?i)(SECRET|TOKEN|PASSWORD|KEY)\s*=\s*["']?.+["']?'''
+tags = ["secret"]
+
+[[rules]]
+id = "github-actions-secrets"
+description = "GitHub Actions secrets"
+regex = '''(?i)(secrets\.)([a-zA-Z0-9_]+)'''
+tags = ["github", "actions"]
+
+# Configurer les options globales
+[global]
+exclude = [
+    "^(.*)test(.*)$",  # Exclure les fichiers de test
+    "^(.*)example(.*)$"  # Exclure les fichiers d'exemple
+]
