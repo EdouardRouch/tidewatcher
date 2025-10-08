@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   watchertoucher:
-    image: ciuse99/watchertoucher:latest  # Change to your Docker Hub username if different
+    image: edouardrouch/tidewatcher:latest  # Change to your Docker Hub username if different
     container_name: watchertoucher
     environment:
       - JELLYFIN_URL=http://192.168.178.252:8096
@@ -11,7 +11,7 @@ services:
       - LOG_TO_STDOUT=true
       - DELAY_SECONDS=60
       - POLL_TIMEOUT=5
-      - TZ=Europe/Rome
+      - TZ=Europe/Paris
     volumes:
       - /mnt/jellyfin:/data:ro   # Replace with your actual media library folder (read-only)
       - ./logs:/var/log                      # Local folder for logs if LOG_TO_FILE is true
