@@ -16,10 +16,10 @@
   ],
   "packageRules": [
     {
-      "packagePatterns": [
+      "enabled": true,
+      "matchPackageNames": [
         "*"
-      ],
-      "enabled": true
+      ]
     },
     {
       "matchUpdateTypes": [
@@ -33,13 +33,13 @@
       "ignoreTests": true
     },
     {
-      "managers": [
+      "matchManagers": [
         "dockerfile"
       ],
       "automerge": true
     },
     {
-      "managers": [
+      "matchManagers": [
         "github-actions"
       ],
       "enabled": true
