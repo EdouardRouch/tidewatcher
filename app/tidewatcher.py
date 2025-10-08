@@ -30,7 +30,7 @@ LOGFILE = os.getenv("LOGFILE", "/var/log/tidewatcher.log")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 DELAY_SECONDS = int(os.getenv("DELAY_SECONDS", 60))
 POLL_TIMEOUT = int(os.getenv("POLL_TIMEOUT", 5))
-DATE_FORMAT = os.getenv("DATE_FORMAT", "%Y-%m-%d %H:%M:%S")
+DATE_FORMAT = os.getenv("DATE_FORMAT", "%d-%m-%Y %H:%M:%S")
 
 default_filetypes = [
     "*.mkv", "*.mp4", "*.avi", "*.m4v", "*.mov", "*.ts", "*.vob", "*.webm",
@@ -193,6 +193,9 @@ def main():
     Starts the observer and monitors changes in the media folder.
     """
     logger.info(f"tidewatcher {VERSION} started. Watching {MEDIA_FOLDER}")
+    logger.debug(f"JELLYFIN_URL={JELLYFIN_URL}")
+    logger.debug(f"LOG_LEVEL={LOG_LEVEL}, LOG_TO_STDOUT={LOG_TO_STDOUT}, LOG_TO_FILE={LOG_TO_FILE}, LOGFILE={LOGFILE}, DELAY_SECONDS={DELAY_SECONDS}, POLL_TIMEOUT={POLL_TIMEOUT}, DATE_FORMAT={DATE_FORMAT}")
+    logger.debug(f"Watching for file types: {FILETYPES}\n ignoring: {IGNORED_FILES}")
     observer = PollingObserver(timeout=POLL_TIMEOUT)
     observer.schedule(Handler(), path=MEDIA_FOLDER, recursive=True)
     observer.start()
